@@ -3,4 +3,12 @@ name: TestWokflowNew
 on: 
   push:
     branches:
-      -master
+      - master
+jobs:
+  mytesting:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: checkout
+      run: echo Hello, World!
+    
