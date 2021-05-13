@@ -1,4 +1,33 @@
-﻿name: Deploy on Nuget
+﻿name: My workflow
 
-on: push
+on: ["push"]
+	
+env:
+	PROJECT_PATH: TestOfNuget.csproj
+	PACKAGE_OUPUT_DIRECTORY: ${{github.workspace}}\output
+	NUGET_SOURCE_URL: "https://api.nuget.org/v3/index.json"
 
+jobs:
+	deploy:
+	name: Deploy
+	runs-on: windows-latest
+	steps:
+	-name: CheckOut
+	uses: actions/checkout@v2
+
+	-name: InstallDotNet
+	uses: actions/setup-dotnet@v1
+	with:
+		dotnet-version: 4.8
+
+	-name: RestorePackages
+	run: dotnet restore ${{env.PROJECT_PATH}}
+
+	-name: BuildProject
+	run: dotnet build ${{env.PROJECT_PATH}} --no-restore --configuration Release
+
+	-name: Pack-Project
+	run: dotnet pack ${{env.PROJECT_PATH}} --no-restore --no-build --configuration Release --include-symbols --output ${{env.PACKAGE_OUPUT_DIRECTORY}}
+
+	-name: Push-Package
+	run: dotnet nuget push ${{env.PACKAGE_OUPUT_DIRECTORY}}\*.nupkg  -k ${{secrets.NUGET_AUTH_TOKEN}} -s ${{env.NUGET_SOURCE_URL}}
