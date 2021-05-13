@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include=".github\workflows\nuget.yaml" />
+    <None Include=".github\workflows\nuget.yml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
