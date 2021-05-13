@@ -26,7 +26,7 @@ jobs:
       - name: Nuget SetAPIKey
         run: nuget setapikey ${{secrets.GIT_TOKEN}} -Source "github"
       - name: view dir2
-        run: cd TestOfNuget
+        run: cd D:\a\TestOfNuget\TestOfNuget\TestOfNuget
       - name: view dir2
         run: dir
       - name: Publish the package to GitHub packages
