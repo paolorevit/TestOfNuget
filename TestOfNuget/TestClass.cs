@@ -9,6 +9,6 @@ namespace TestOfNuget
 {
     public class TestClass
     {
-        public static string TestMet() => "1.0.1";
+        public static string TestMet() => "1.0.2";
     }
 }
