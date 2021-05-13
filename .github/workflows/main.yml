@@ -2,7 +2,6 @@ name: TestWorkflow
 on: push
 jobs:
   deploy:
-  name: Deploy
   runs-on: windows-latest
   steps:
   name: CheckOut
