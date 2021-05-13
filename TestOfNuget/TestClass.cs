@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Autodesk.Revit.UI;
 
 namespace TestOfNuget
 {
@@ -11,7 +12,7 @@ namespace TestOfNuget
     {
         public void TestMet()
         {
-            Debug.WriteLine("TestLine");
+            TaskDialog.Show("revit", "1.0.1");
         }
     }
 }
