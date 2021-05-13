@@ -1,14 +1,30 @@
-name: TestWokflowNew
+name: dotNet Framework Build
 
-on: 
-  push:
-    branches:
-      - master
+on: [push]
+
 jobs:
-  mytesting:
+  build:
+
     runs-on: windows-latest
+
     steps:
-    - uses: actions/checkout@v1
-    - name: checkout
-      run: echo Hello, World!
-    
+      - uses: actions/checkout@master
+      - uses: nuget/setup-nuget@v1.0.2
+        with:
+          nuget-api-key: ${{ secrets.NUGET_AUTH_TOKEN }}
+          nuget-version: 'latest'
+      - name: Setup MSBuild.exe
+        uses: warrenbuckley/Setup-MSBuild@v1
+        env:
+          working-directory: TestOfNuget
+      - run: msbuild -t:restore
+        working-directory: TestOfNuget
+      - run: msbuild -t:build
+        working-directory: TestOfNuget
+      - name: Nuget Add Source
+        run: nuget sources Add -Name "github" -Source https://nuget.pkg.github.com/paolorevit/index.json -UserName paolorevit -Password ${{ secrets.GIT_TOKEN }}
+      - name: Nuget SetAPIKey
+        run: nuget setapikey ${{ secrets.GIT_TOKEN }} -Source "github"
+      - name: Publish the package to GitHub packages
+        working-directory: TestOfNuget
+        run: nuget push bin\Debug\*.nupkg -source "github" -SkipDuplicate
