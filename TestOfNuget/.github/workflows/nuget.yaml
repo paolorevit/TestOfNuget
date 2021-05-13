@@ -1,0 +1,4 @@
+﻿name: Deploy on Nuget
+
+on: push
+
