@@ -9,13 +9,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
-      - name: ACTIONS_ALLOW_UNSECURE_COMMANDS
-        id: ACTIONS_ALLOW_UNSECURE_COMMANDS
-        run: echo 'ACTIONS_ALLOW_UNSECURE_COMMANDS=true' >> $GITHUB_ENV
       - name: SetNugetKey
-        run: echo "NUGET_KEY=${{ secrets.NUGET_AUTH_TOKEN }}" >> $GITHUB_ENV
+        run: echo "NUGET_KEY=${{secrets.NUGET_AUTH_TOKEN}}" >> $GITHUB_ENV
       - name: SetGitToken
-        run: echo "GIT_TOKEN=${{ secrets.GIT_TOKEN }}" >> $GITHUB_ENV
+        run: echo "GIT_TOKEN=${{secrets.GIT_TOKEN}}" >> $GITHUB_ENV
       - uses: nuget/setup-nuget@v1.0.2
         with:
           nuget-api-key: ${{env.NUGET_KEY}}
