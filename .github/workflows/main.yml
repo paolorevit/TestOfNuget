@@ -15,5 +15,5 @@ jobs:
         run: echo "GIT_TOKEN=${{secrets.GIT_TOKEN}}" >> $GITHUB_ENV
       - uses: nuget/setup-nuget@v1.0.2
         with:
-          nuget-api-key: ${{env.NUGET_KEY}}
+          nuget-api-key: ${{secret.NUGET_AUTH_TOKEN}}
           nuget-version: 'latest'
