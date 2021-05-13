@@ -1,8 +1,6 @@
-name: TestWorkflow
-on: push
-jobs:
-  deploy:
-  runs-on: windows-latest
-  steps:
-  name: CheckOut
-  uses: actions/checkout@v2
+name: TestWokflowNew
+
+on: 
+  push:
+    branches:
+      -master
