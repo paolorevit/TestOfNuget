@@ -28,9 +28,9 @@ jobs:
       - run: msbuild -t:build
         working-directory: TestOfNuget
       - name: Nuget Add Source
-        run: nuget sources Add -Name "github" -Source https://nuget.pkg.github.com/paolorevit/index.json -UserName paolorevit -password somepass
+        run: nuget sources Add -Name "github" -Source https://nuget.pkg.github.com/paolorevit/index.json -UserName paolorevit -password ${{secrets.GIT_PAS}}
       - name: Nuget SetAPIKey
-        run: nuget setapikey ${{env.GIT_TOKEN}} -Source "github"
+        run: nuget setapikey ${{secrets.GIT_TOKEN}} -Source "github"
       - name: Publish the package to GitHub packages
         working-directory: TestOfNuget
         run: nuget push bin\Debug\*.nupkg -source "github" -SkipDuplicate
