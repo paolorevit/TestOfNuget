@@ -14,7 +14,7 @@ jobs:
       - name: SetGitToken
         run: echo "GIT_TOKEN=${{secrets.GIT_TOKEN}}" >> $GITHUB_ENV
       - name: SetPassword
-        run: echo "GIT_PASS=${{secrets.GIT_PASS}}" >> $GITHUB_ENV
+        run: echo "GIT_PAS=${{secrets.GIT_PAS}}" >> $GITHUB_ENV
       - uses: nuget/setup-nuget@v1.0.5
         with:
           nuget-api-key: ${{secrets.NUGET_AUTH_TOKEN}}
@@ -28,7 +28,7 @@ jobs:
       - run: msbuild -t:build
         working-directory: TestOfNuget
       - name: Nuget Add Source
-        run: nuget sources Add -Name "github" -Source https://nuget.pkg.github.com/paolorevit/index.json -UserName paolorevit -Password ${{env.GIT_PASS}}
+        run: nuget sources Add -Name "github" -Source https://nuget.pkg.github.com/paolorevit/index.json -UserName paolorevit -Password ${{env.GIT_PAS}}
       - name: Nuget SetAPIKey
         run: nuget setapikey ${{env.GIT_TOKEN}} -Source "github"
       - name: Publish the package to GitHub packages
