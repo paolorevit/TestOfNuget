@@ -8,6 +8,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - uses: actions/checkout@master
       - name: ACTIONS_ALLOW_UNSECURE_COMMANDS
         id: ACTIONS_ALLOW_UNSECURE_COMMANDS
         run: echo 'ACTIONS_ALLOW_UNSECURE_COMMANDS=true' >> $GITHUB_ENV
@@ -15,7 +16,6 @@ jobs:
         run: echo "NUGET_KEY=${{ secrets.NUGET_AUTH_TOKEN }}" >> $GITHUB_ENV
       - name: SetGitToken
         run: echo "GIT_TOKEN=${{ secrets.GIT_TOKEN }}" >> $GITHUB_ENV
-      - uses: actions/checkout@master
       - uses: nuget/setup-nuget@v1.0.2
         with:
           nuget-api-key: ${{env.NUGET_KEY}}
